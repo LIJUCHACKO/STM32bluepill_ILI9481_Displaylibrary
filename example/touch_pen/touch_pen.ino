@@ -136,13 +136,6 @@ comme:
   pinMode(YP, OUTPUT);
   if (p.z > MINPRESSURE && p.z < MAXPRESSURE) 
   {
-      if (p.y < (TS_MINY-5)) 
-      {
-          my_lcd.Set_Draw_color(BLACK);
-          my_lcd.Fill_Rectangle(0, COLORBOXSIZE, my_lcd.Get_Display_Width()-1, my_lcd.Get_Display_Height()-1);
-      }
-      //p.x = my_lcd.Get_Display_Width()-map(p.x, TS_MINX, TS_MAXX, my_lcd.Get_Display_Width(), 0);
-      //p.y = my_lcd.Get_Display_Height()-map(p.y, TS_MINY, TS_MAXY, my_lcd.Get_Display_Height(), 0);
       p.x = map(p.x, TS_MINX, TS_MAXX, my_lcd.Get_Display_Width(), 0);
       p.y = map(p.y, TS_MINY, TS_MAXY, my_lcd.Get_Display_Height(),0);
      if(p.y < COLORBOXSIZE/2+45 && p.y > COLORBOXSIZE/2+20) 

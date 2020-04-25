@@ -52,8 +52,8 @@
 #define setWriteDir() { /*PB3-PB7 */GPIOB->regs->CRL = (GPIOB->regs->CRL & 0x00000FFF)|0x11111000 ;\
                         /*PB8-PB9 */GPIOB->regs->CRH = (GPIOB->regs->CRH & 0xFFFFFF00)|0x00000011 ; \
                         /*A15*/GPIOA->regs->CRH = (GPIOA->regs->CRH & 0x0FFFFFFF)|0x10000000 ;  LCD_WR_HIGH;}
-#define setReadDir() { /*PB3-PB7 */GPIOB->regs->CRL = (GPIOB->regs->CRL & 0x00000FFF)|0x88888000 ;\
-                        /*PB8-PB9 */GPIOB->regs->CRH = (GPIOB->regs->CRH & 0xFFFFFF00)|0x00000088 ;\
+#define setReadDir() { /*PB3-PB7 */GPIOB->regs->CRL = (GPIOB->regs->CRL & 0x00000FFF)|0x00000000 ;\
+                        /*PB8-PB9 */GPIOB->regs->CRH = (GPIOB->regs->CRH & 0xFFFFFF00)|0x00000000 ;\
                         /*A15*/GPIOA->regs->CRH = (GPIOA->regs->CRH & 0x0FFFFFFF)|0x80000000 ;  LCD_WR_LOW;}
 
 MY_ILI9486_TFT::MY_ILI9486_TFT(void)
