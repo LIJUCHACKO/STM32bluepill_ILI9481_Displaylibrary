@@ -27,8 +27,8 @@ MY_ILI9486_TFT my_lcd;
 
 //param calibration from touch
 
-#define TS_MINX 130 
-#define TS_MAXX 894
+#define TS_MINX 120 
+#define TS_MAXX 900
 
 #define TS_MINY 80
 #define TS_MAXY 920
