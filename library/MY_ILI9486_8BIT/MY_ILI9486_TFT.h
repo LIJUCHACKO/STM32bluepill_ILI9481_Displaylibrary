@@ -1,5 +1,5 @@
-#ifndef MY_ILI9486_TFT_H_
-#define MY_ILI9486_TFT_H_
+#ifndef ILI9481_TFT_DISPLAY_H_
+#define ILI9481_TFT_DISPLAY_H_
 // Register names from Peter Barrett's Microtouch code
 #define ILI932X_START_OSC          0x00
 #define ILI932X_DRIV_OUT_CTRL      0x01
@@ -235,11 +235,11 @@
 }lcd_info;
 
 
-class MY_ILI9486_TFT:public LCDWIKI_GUI
+class ILI9481_TFT_DISPLAY:public LCDWIKI_GUI
 {
 
 	public:
-        MY_ILI9486_TFT(void);
+        ILI9481_TFT_DISPLAY(void);
 	void Init_LCD(void);
 	//void resetlcd(void);
 	//void start(uint16_t ID);

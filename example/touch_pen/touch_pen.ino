@@ -1,7 +1,7 @@
 /***********************************************************************************
 *This program is a demo of drawing
-*This demo was made for 3.5" LCD module  8bit with ILI9486 controller. 
-*MY_ILI9486_TFT.h library is created by refering to LCDWIKI_KBV.h, LCDWIKI_KBV.cpp. 
+*This demo was made for 3.5" LCD module  8bit with ILI9481 controller. 
+*ILI9481_TFT_DISPLAY.h library is created by refering to LCDWIKI_KBV.h, LCDWIKI_KBV.cpp. 
 *TouchScreen_STM library can be used along with this libraray.
 *
 *This program requires the the LCDKIWI  library and TouchScreen_STM.
@@ -21,8 +21,8 @@
 #include <TouchScreen_STM.h> //touch library
 #include <LCDWIKI_GUI.h> //Core graphics library
 
-#include <MY_ILI9486_TFT.h>
-MY_ILI9486_TFT my_lcd;
+#include <ILI9481_TFT_DISPLAY.h>
+ILI9481_TFT_DISPLAY my_lcd;
 
 
 //param calibration from touch

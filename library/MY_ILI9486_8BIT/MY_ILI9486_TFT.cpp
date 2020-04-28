@@ -1,7 +1,7 @@
 /***********************************************************************************
 *This program is a demo of drawing
 *This demo was made for 3.5" LCD module  8bit with ILI9486 controller. 
-*MY_ILI9486_TFT.h library is created by refering to LCDWIKI_KBV.h, LCDWIKI_KBV.cpp. 
+*ILI9481_TFT_DISPLAY.h library is created by refering to LCDWIKI_KBV.h, LCDWIKI_KBV.cpp. 
 *TouchScreen_STM library can be used along with this libraray.
 *
 *This program requires the the LCDKIWI  library and TouchScreen_STM.
@@ -18,7 +18,7 @@
 *Remember to connect pins as described above
 *
 **********************************************************************************/
-#include "MY_ILI9486_TFT.h"
+#include "ILI9481_TFT_DISPLAY.h"
 
 
 ///TFT_DATA  A15 ,B3 TO B9,
@@ -56,7 +56,7 @@
                         /*PB8-PB9 */GPIOB->regs->CRH = (GPIOB->regs->CRH & 0xFFFFFF00)|0x00000000 ;\
                         /*A15*/GPIOA->regs->CRH = (GPIOA->regs->CRH & 0x0FFFFFFF)|0x80000000 ;  LCD_WR_LOW;}
 
-MY_ILI9486_TFT::MY_ILI9486_TFT(void)
+ILI9481_TFT_DISPLAY::ILI9481_TFT_DISPLAY(void)
 {
   HEIGHT=height=480;
   WIDTH=width=320;
@@ -83,12 +83,12 @@ XC=ILI9341_COLADDRSET,YC=ILI9341_PAGEADDRSET,CC=ILI9341_MEMORYWRITE,RC=HX8357_RA
 
 
 //Pass 8-bit (each) R,G,B, get back 16-bit packed color
-uint16_t MY_ILI9486_TFT::Color_To_565(uint8_t r, uint8_t g, uint8_t b)
+uint16_t ILI9481_TFT_DISPLAY::Color_To_565(uint8_t r, uint8_t g, uint8_t b)
 {
 	return ((r & 0xF8) << 8) | ((g & 0xFC) << 3) | ((b & 0xF8) >> 3);
         
 }       
-uint8_t MY_ILI9486_TFT::Lcd_Read_Bus() //8bit
+uint8_t ILI9481_TFT_DISPLAY::Lcd_Read_Bus() //8bit
 {
   uint8_t dst;
   LCD_WR_HIGH;
@@ -108,7 +108,7 @@ uint8_t MY_ILI9486_TFT::Lcd_Read_Bus() //8bit
 
 
 
-void MY_ILI9486_TFT::Lcd_Writ_Bus(uint8_t d)
+void ILI9481_TFT_DISPLAY::Lcd_Writ_Bus(uint8_t d)
 {
 
   //D1-D7->B3-B10
@@ -121,42 +121,42 @@ void MY_ILI9486_TFT::Lcd_Writ_Bus(uint8_t d)
 }
 
 
-void MY_ILI9486_TFT::Lcd_Write_Com(uint8_t VH)  
+void ILI9481_TFT_DISPLAY::Lcd_Write_Com(uint8_t VH)  
 {   
   LCD_RS_LOW;
   Lcd_Writ_Bus(VH);
 }
-void MY_ILI9486_TFT::Lcd_Write_Com16(uint16_t VH)  
+void ILI9481_TFT_DISPLAY::Lcd_Write_Com16(uint16_t VH)  
 {   
   LCD_RS_LOW;
   Lcd_Writ_Bus(VH>>8);
   Lcd_Writ_Bus(VH); 
 }
 
-uint8_t MY_ILI9486_TFT::Lcd_Read_Data()
+uint8_t ILI9481_TFT_DISPLAY::Lcd_Read_Data()
 {
   LCD_RS_HIGH;
   return Lcd_Read_Bus();
 }
-void MY_ILI9486_TFT::Lcd_Write_Data(uint8_t VH)
+void ILI9481_TFT_DISPLAY::Lcd_Write_Data(uint8_t VH)
 {
   LCD_RS_HIGH;
   Lcd_Writ_Bus(VH);
 }
 
-void MY_ILI9486_TFT::Lcd_Write_Data16(uint16_t j)
+void ILI9481_TFT_DISPLAY::Lcd_Write_Data16(uint16_t j)
 {
         Lcd_Write_Data(j>>8);
         Lcd_Write_Data(j); 
 }
 
-void MY_ILI9486_TFT::Lcd_Write_Com_Data(uint8_t com,uint8_t dat)
+void ILI9481_TFT_DISPLAY::Lcd_Write_Com_Data(uint8_t com,uint8_t dat)
 {
   Lcd_Write_Com(com);
   Lcd_Write_Data(dat);
 }
 //read value from lcd register 
-uint16_t MY_ILI9486_TFT::Read_Reg(uint16_t reg, int8_t index)
+uint16_t ILI9481_TFT_DISPLAY::Read_Reg(uint16_t reg, int8_t index)
 {
 	uint16_t ret,high;
     uint8_t low;
@@ -183,7 +183,7 @@ uint16_t MY_ILI9486_TFT::Read_Reg(uint16_t reg, int8_t index)
     return ret;
 }
 //read LCD controller chip ID 
-uint16_t MY_ILI9486_TFT::Read_ID(void)
+uint16_t ILI9481_TFT_DISPLAY::Read_ID(void)
 {
 	uint16_t ret;
 	if ((Read_Reg(0x04,0) == 0x00)&&(Read_Reg(0x04,1) == 0x8000))
@@ -215,7 +215,7 @@ uint16_t MY_ILI9486_TFT::Read_ID(void)
 	}
 }
 
-void MY_ILI9486_TFT::Set_Addr_Window(int16_t x1,int16_t y1,int16_t x2,int16_t y2)
+void ILI9481_TFT_DISPLAY::Set_Addr_Window(int16_t x1,int16_t y1,int16_t x2,int16_t y2)
 {
         Lcd_Write_Com(0x2a);
 	Lcd_Write_Data(x1>>8);
@@ -229,7 +229,7 @@ void MY_ILI9486_TFT::Set_Addr_Window(int16_t x1,int16_t y1,int16_t x2,int16_t y2
 	Lcd_Write_Data(y2);
 	Lcd_Write_Com(0x2c); 							 
 }
-void MY_ILI9486_TFT::Init_LCD(void)
+void ILI9481_TFT_DISPLAY::Init_LCD(void)
 {
   
   LCD_REST_HIGH;
@@ -341,7 +341,7 @@ void MY_ILI9486_TFT::Init_LCD(void)
    Set_Rotation(rotation);
 }
 
-void MY_ILI9486_TFT::Draw_Pixe(int16_t x, int16_t y, uint16_t color)
+void ILI9481_TFT_DISPLAY::Draw_Pixe(int16_t x, int16_t y, uint16_t color)
 {
 	if((x < 0) || (y < 0) || (x > Get_Width()) || (y > Get_Height()))
 	{
@@ -353,7 +353,7 @@ void MY_ILI9486_TFT::Draw_Pixe(int16_t x, int16_t y, uint16_t color)
 	Lcd_Write_Data16(color);
 	LCD_CS_HIGH;  
 }
-void MY_ILI9486_TFT::H_line(int16_t x, int16_t y, int16_t l, uint16_t c)                   
+void ILI9481_TFT_DISPLAY::H_line(int16_t x, int16_t y, int16_t l, uint16_t c)                   
 {	
   uint8_t i,j;
   LCD_CS_LOW;
@@ -367,7 +367,7 @@ void MY_ILI9486_TFT::H_line(int16_t x, int16_t y, int16_t l, uint16_t c)
   LCD_CS_HIGH;   
 }
 
-void MY_ILI9486_TFT::V_line(int16_t x, int16_t y, int16_t l, uint16_t c)                   
+void ILI9481_TFT_DISPLAY::V_line(int16_t x, int16_t y, int16_t l, uint16_t c)                   
 {	
   uint8_t i,j;
   LCD_CS_LOW;
@@ -381,7 +381,7 @@ void MY_ILI9486_TFT::V_line(int16_t x, int16_t y, int16_t l, uint16_t c)
   LCD_CS_HIGH;   
 }
 
-void MY_ILI9486_TFT::Rect(int16_t x,int16_t y,int16_t w,int16_t h,uint16_t c)
+void ILI9481_TFT_DISPLAY::Rect(int16_t x,int16_t y,int16_t w,int16_t h,uint16_t c)
 {
   H_line(x  , y  , w, c);
   H_line(x  , y+h, w, c);
@@ -389,7 +389,7 @@ void MY_ILI9486_TFT::Rect(int16_t x,int16_t y,int16_t w,int16_t h,uint16_t c)
   V_line(x+w, y  , h, c);
 }
 
-void MY_ILI9486_TFT::Fill_Rect(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t c)
+void ILI9481_TFT_DISPLAY::Fill_Rect(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t c)
 {
 
   int16_t end;
@@ -407,7 +407,7 @@ void MY_ILI9486_TFT::Fill_Rect(int16_t x, int16_t y, int16_t w, int16_t h, uint1
 int RGB(int r,int g,int b)
 {return r << 16 | g << 8 | b;
 }
-void MY_ILI9486_TFT::LCD_Clear(unsigned int j)                   
+void ILI9481_TFT_DISPLAY::LCD_Clear(unsigned int j)                   
 {	
   uint8_t i,m;
   int16_t w=320,h=480,end;
@@ -423,7 +423,7 @@ void MY_ILI9486_TFT::LCD_Clear(unsigned int j)
    LCD_CS_HIGH; 
   
 }
-void MY_ILI9486_TFT::Set_LR(void)
+void ILI9481_TFT_DISPLAY::Set_LR(void)
 {
 	LCD_CS_LOW;
 	Lcd_Write_Com_Data(0x04,(width -1)>>8);
@@ -433,7 +433,7 @@ void MY_ILI9486_TFT::Set_LR(void)
 	LCD_CS_HIGH;
 }
 
-void MY_ILI9486_TFT::Set_Rotation(uint8_t r)
+void ILI9481_TFT_DISPLAY::Set_Rotation(uint8_t r)
 {
     rotation = r & 3;           // just perform the operation ourselves on the protected variables
     width = (rotation & 1) ? HEIGHT : WIDTH;
@@ -467,7 +467,7 @@ void MY_ILI9486_TFT::Set_Rotation(uint8_t r)
 	LCD_CS_HIGH;
 }
 
-void MY_ILI9486_TFT::Vert_Scroll(int16_t top, int16_t scrollines, int16_t offset)
+void ILI9481_TFT_DISPLAY::Vert_Scroll(int16_t top, int16_t scrollines, int16_t offset)
 {
     int16_t bfa = HEIGHT - top - scrollines; 
     int16_t vsp;
@@ -501,7 +501,7 @@ void MY_ILI9486_TFT::Vert_Scroll(int16_t top, int16_t scrollines, int16_t offset
 	
 }
 
-void MY_ILI9486_TFT::Push_Command(uint8_t cmd, uint8_t *block, int8_t N)
+void ILI9481_TFT_DISPLAY::Push_Command(uint8_t cmd, uint8_t *block, int8_t N)
 {
    LCD_CS_LOW; 
     Lcd_Write_Com(cmd);
@@ -514,23 +514,23 @@ void MY_ILI9486_TFT::Push_Command(uint8_t cmd, uint8_t *block, int8_t N)
 }
 
 //get lcd width
-int16_t MY_ILI9486_TFT::Get_Width(void) const
+int16_t ILI9481_TFT_DISPLAY::Get_Width(void) const
 {
 	return width;
 }
 
 //get lcd height
-int16_t MY_ILI9486_TFT::Get_Height(void) const
+int16_t ILI9481_TFT_DISPLAY::Get_Height(void) const
 {
 	return height;
 }
-uint8_t MY_ILI9486_TFT::Get_Rotation(void) const
+uint8_t ILI9481_TFT_DISPLAY::Get_Rotation(void) const
 {
 	return rotation;
 }
 
 //Anti color display 
-void MY_ILI9486_TFT::Invert_Display(boolean i)
+void ILI9481_TFT_DISPLAY::Invert_Display(boolean i)
 {
 	 Lcd_Write_Com(0x02c); //write_memory_start
   	//digitalWrite(LCD_RS,HIGH);
@@ -540,7 +540,7 @@ void MY_ILI9486_TFT::Invert_Display(boolean i)
 	LCD_CS_HIGH;
 }
 //push color table for 16bits
-void MY_ILI9486_TFT::Push_Any_Color(uint16_t * block, int16_t n, bool first, uint8_t flags)
+void ILI9481_TFT_DISPLAY::Push_Any_Color(uint16_t * block, int16_t n, bool first, uint8_t flags)
 {
 
 	uint16_t color;
@@ -568,7 +568,7 @@ void MY_ILI9486_TFT::Push_Any_Color(uint16_t * block, int16_t n, bool first, uin
    LCD_CS_HIGH;
 
 }
-int16_t MY_ILI9486_TFT::Read_GRAM(int16_t x, int16_t y, uint16_t *block, int16_t w, int16_t h)
+int16_t ILI9481_TFT_DISPLAY::Read_GRAM(int16_t x, int16_t y, uint16_t *block, int16_t w, int16_t h)
 {
    
     uint16_t ret, dummy;
@@ -631,7 +631,7 @@ int16_t MY_ILI9486_TFT::Read_GRAM(int16_t x, int16_t y, uint16_t *block, int16_t
 	return 0;
 }
 
-void MY_ILI9486_TFT::Draw_Lin(int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t color) {
+void ILI9481_TFT_DISPLAY::Draw_Lin(int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t color) {
 
   int16_t i;
   int16_t dx,dy;
@@ -693,31 +693,31 @@ void MY_ILI9486_TFT::Draw_Lin(int16_t x1, int16_t y1, int16_t x2, int16_t y2, ui
 }
 
 
-void MY_ILI9486_TFT::Fill_Circl(int16_t x, int16_t y, int16_t radius,uint16_t color){
+void ILI9481_TFT_DISPLAY::Fill_Circl(int16_t x, int16_t y, int16_t radius,uint16_t color){
     
     Set_Draw_color( color);
     Fill_Circle( x,  y,  radius);
 }
-void MY_ILI9486_TFT::printString(const char *st){
+void ILI9481_TFT_DISPLAY::printString(const char *st){
     
     Print_String(st, text_x, text_y);
     
 }
-void MY_ILI9486_TFT::printInt(long num){
+void ILI9481_TFT_DISPLAY::printInt(long num){
     
     Print_Number_Int(num, text_x, text_y, 5, ' ', 10);
     
 }
-void MY_ILI9486_TFT::printFloat(double num){
+void ILI9481_TFT_DISPLAY::printFloat(double num){
     
     Print_Number_Float(num, 2, text_x, text_y, '.', 0, ' ');
 }
-//void MY_ILI9486_TFT::print(uint8_t *st){
+//void ILI9481_TFT_DISPLAY::print(uint8_t *st){
 //    
 //    Print_String(*st, text_x, text_y);
 //    
 //}
-//void MY_ILI9486_TFT::print(const uint8_t *st){
+//void ILI9481_TFT_DISPLAY::print(const uint8_t *st){
 //    Print_String( *st, text_x, text_y);
     
 //}
