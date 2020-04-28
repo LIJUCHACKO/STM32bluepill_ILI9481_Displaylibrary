@@ -209,6 +209,10 @@ uint16_t ILI9481_TFT_DISPLAY::Read_ID(void)
 	{
 		return 0x9488;
 	}
+	else if(ret == 0x9481)
+	{
+		return 0x9481;
+	}
 	else
 	{
 		return Read_Reg(0, 0); //others
