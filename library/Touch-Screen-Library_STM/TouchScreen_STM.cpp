@@ -104,6 +104,8 @@ TSPoint TouchScreen::getPoint(void) {
    }
 #if NUMSAMPLES > 2
    insert_sort(samples, NUMSAMPLES);
+      if((samples[NUMSAMPLES/2]-samples[NUMSAMPLES/2+1])>2){valid = 0; }
+if((samples[NUMSAMPLES/2]-samples[NUMSAMPLES/2+1])<-2){valid = 0; }
 #endif
 #if NUMSAMPLES == 2
    if (samples[0] != samples[1]) { valid = 0; }
@@ -139,6 +141,8 @@ TSPoint TouchScreen::getPoint(void) {
 
 #if NUMSAMPLES > 2
    insert_sort(samples, NUMSAMPLES);
+      if((samples[NUMSAMPLES/2]-samples[NUMSAMPLES/2+1])>2){valid = 0; }
+if((samples[NUMSAMPLES/2]-samples[NUMSAMPLES/2+1])<-2){valid = 0; }
 #endif
 #if NUMSAMPLES == 2
    if (samples[0] != samples[1]) { valid = 0; }
@@ -200,9 +204,9 @@ TSPoint TouchScreen::getPoint(void) {
 #endif
    }
 
-   //if (! valid) {
-   //  z = 0;
-   //}
+   if (! valid) {
+     z = 0;
+    }
   #if defined (__STM32F1__)
    x=x*1023/4095;
    y=1023-y*1023/4095;
