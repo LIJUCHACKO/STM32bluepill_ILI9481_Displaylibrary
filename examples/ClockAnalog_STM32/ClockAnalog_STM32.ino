@@ -22,7 +22,6 @@ float sx = 0, sy = 1, mx = 1, my = 0, hx = -1, hy = 0;    // Saved H, M, S x & y
 float sdeg=0, mdeg=0, hdeg=0;
 uint16_t osx=120, osy=120, omx=120, omy=120, ohx=120, ohy=120;  // Saved H, M, S x & y coords
 uint16_t x00=0, x11=0, y00=0, y11=0;
-uint32_t targetTime = 0;                    // for next 1 second timeout
 uint8_t hh,mm,ss;
 boolean initial = 1;
 //-----------------------------------------------------------------------------
@@ -131,7 +130,7 @@ void setup(void) {
 
   tft.Fill_Circl(120, 121, 3, WHITE);
   
-  targetTime = millis() + 1000; 
+ 
 }
 
 void loop() {
@@ -142,8 +141,8 @@ void loop() {
       sprintf(s2, "%u/%u/%u,  %02u:%02u:%02u\n",
       mtt.day,mtt.month,  mtt.year+1970,  mtt.hour, mtt.minute, mtt.second);
 
-  if (targetTime < millis()) {
-    targetTime = millis()+1000;
+
+
     ss=mtt.second;
     mm=mtt.minute;
     hh=mtt.hour;
@@ -193,7 +192,7 @@ void loop() {
     tft.Set_Text_Cousur(20, 260);
     tft.Set_Text_Size(2);
     tft.Print_String(s2,20,260);
-  }
+  
   delay(1000);
 }
 
