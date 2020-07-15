@@ -5,4 +5,4 @@ This library is prepared from 'LCDWIKI_KBV.h'-display library, for using ILI9481
 ![Alt text](LCD_3.5.jpg?raw=true "Title" )
 
 ## EXAMPLE
-![Alt text](photo_2020-04-19_17-45-51.jpg?raw=true "Title" )
+![Alt text](setup.jpg?raw=true "Title" )

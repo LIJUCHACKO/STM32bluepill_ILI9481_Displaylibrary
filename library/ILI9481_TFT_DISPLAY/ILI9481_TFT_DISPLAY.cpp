@@ -12,7 +12,7 @@
 *
 *pin usage as follow:
 *                  LCD_CS  LCD_RS  LCD_WR  LCD_RD  LCD_RST  SD_SS  SD_DI  SD_DO  SD_SCK 
-*     STM32F103C    PA0     PA1    PA9     PA8     PA10     PA4   PA7   PA6   PA5                            
+*     STM32F103C    PA0     PA1    PA9     PA8     PA10     PB12   PB15   PB14   PB13
 *                  LCD_D0  LCD_D1  LCD_D2  LCD_D3  LCD_D4  LCD_D5  LCD_D6  LCD_D7  
 *     STM32F103C    PA15    PB3    PB4     PB5     PB6     PB7      PB8     PB9                  
 *Remember to connect pins as described above
