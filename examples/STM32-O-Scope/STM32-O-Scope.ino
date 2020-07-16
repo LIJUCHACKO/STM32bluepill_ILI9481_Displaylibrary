@@ -144,7 +144,7 @@ unsigned long timeBase = 200;  //Timebase in microseconds
 // Screen dimensions
 int16_t myWidth ;
 int16_t myHeight ;
-int buzzer = PA2;
+int buzzer = PA4;
 //Trigger stuff
 bool notTriggered = false;
 
